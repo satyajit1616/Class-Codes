@@ -3,7 +3,7 @@ import time
 
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=False)
-    page = browser.new_page() # open a new page/tab in ur recommnede browser
+    page = browser.new_page()  # open a new page/tab in ur recommended browser
 
     #open a link and hit in api and call the url
     page.goto(r"file:///C:/Users/Srs61/PycharmProjects/PythonProject/AT23/playwrightprac/webpage.html")
@@ -18,8 +18,8 @@ with sync_playwright() as p:
     page.fill("#email","satya@test.com")
 
     #radio button
-    page.locator("input[name='gender']").nth(1).click()
-    # page.locator("//input[@name='gender'][2]").click()  # xpath
+    page.locator("input[name='gender']").nth(0).click()
+    # page.locator("//input[@name='gender'][2]").click() # xpath 
 
     page.fill("#mobile","9876543210")
 
@@ -35,6 +35,6 @@ with sync_playwright() as p:
     # page.keyboard.press("Enter")
 
 
-    time.sleep(5)
+    time.sleep(10)
 
     browser.close()
