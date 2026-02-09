@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dataset Attribute Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>User List</h2>
+
+    <!-- Data attribute example -->
+    <div class="card" data-testid="101" data-name="Satyajit" onclick="showData(this)">
+        Click to view User 101
+    </div>
+
+    <div class="card" data-testid="102" data-name="Sekhar" onclick="showData(this)">
+        Click to view User 102
+    </div>
+
+    <p id="output"></p>
+
+    <script>
+        function showData(element) {
+            const userId = element.dataset.id;
+            const userName = element.dataset.name;
+
+            document.getElementById("output").innerText =
+                "User ID: " + userId + ", Name: " + userName;
+        }
+    </script>
+
+</body>
+</html>

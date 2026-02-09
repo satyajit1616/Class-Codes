@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Selenium Master Practice Page</title>
+
+<style>
+/* ================== GLOBAL STYLES ================== */
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f8f9fa;
+    padding: 20px;
+}
+.section {
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+h2 {
+    margin-top: 0;
+    background: #343a40;
+    color: white;
+    padding: 10px;
+    border-radius: 4px;
+}
+label {
+    display: inline-block;
+    width: 150px;
+    margin-top: 8px;
+}
+input, select, button {
+    padding: 6px;
+    margin: 5px 0;
+}
+table {
+    border-collapse: collapse;
+    width: 60%;
+}
+th, td {
+    border: 1px solid #000;
+    padding: 6px;
+    text-align: center;
+}
+.menu li {
+    display: inline-block;
+    margin-right: 20px;
+    cursor: pointer;
+}
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+.tooltip span {
+    display: none;
+    position: absolute;
+    background: black;
+    color: white;
+    padding: 5px;
+    top: 25px;
+}
+.tooltip:hover span {
+    display: block;
+}
+#drag {
+    width: 80px;
+    height: 80px;
+    background: #dc3545;
+    color: white;
+    text-align: center;
+    line-height: 80px;
+    cursor: grab;
+}
+#drop {
+    width: 220px;
+    height: 120px;
+    border: 2px dashed black;
+    margin-top: 10px;
+}
+.resizable {
+    width: 150px;
+    height: 100px;
+    border: 2px solid #007bff;
+    resize: both;
+    overflow: auto;
+}
+.tab-content {
+    display: none;
+}
+.tab-content.active {
+    display: block;
+}
+</style>
+
+<script>
+/* ================== ALL COUNTRIES (ISO LIST) ================== */
+const countries = [
+"Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina",
+"Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados",
+"Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana",
+"Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada",
+"Chad","Chile","China","Colombia","Comoros","Costa Rica","Croatia","Cuba","Cyprus",
+"Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt",
+"El Salvador","Estonia","Ethiopia","Finland","France","Gabon","Gambia","Georgia","Germany",
+"Ghana","Greece","Grenada","Guatemala","Guinea","Guyana","Haiti","Honduras","Hungary",
+"Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan",
+"Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho",
+"Liberia","Libya","Lithuania","Luxembourg","Madagascar","Malaysia","Maldives","Mali",
+"Malta","Mauritania","Mauritius","Mexico","Moldova","Monaco","Mongolia","Morocco",
+"Mozambique","Myanmar","Namibia","Nepal","Netherlands","New Zealand","Nicaragua","Niger",
+"Nigeria","North Korea","Norway","Oman","Pakistan","Panama","Papua New Guinea","Paraguay",
+"Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda",
+"Saudi Arabia","Senegal","Serbia","Singapore","Slovakia","Slovenia","Somalia","South Africa",
+"South Korea","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria",
+"Taiwan","Tajikistan","Tanzania","Thailand","Togo","Trinidad and Tobago","Tunisia","Turkey",
+"Turkmenistan","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States",
+"Uruguay","Uzbekistan","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"
+];
+
+/* ================== AUTO SUGGEST COUNTRY ================== */
+function suggestCountry() {
+    let input = document.getElementById("countrySearch").value.toLowerCase();
+    let list = document.getElementById("countryList");
+    list.innerHTML = "";
+    countries.filter(c => c.toLowerCase().includes(input))
+        .forEach(c => {
+            let opt = document.createElement("option");
+            opt.value = c;
+            list.appendChild(opt);
+        });
+}
+
+/* ================== DYNAMIC PROPERTIES ================== */
+function changeButtonText() {
+    document.getElementById("dynamicBtn").innerText = "Button Updated";
+}
+
+/* ================== ALERT ================== */
+function showAlert() {
+    alert("This is a Selenium Alert");
+}
+
+/* ================== PROGRESS BAR ================== */
+function startProgress() {
+    let bar = document.getElementById("progress");
+    let value = 0;
+    let timer = setInterval(() => {
+        if (value > 100) clearInterval(timer);
+        bar.value = value++;
+    }, 40);
+}
+
+/* ================== TABS ================== */
+function openTab(tab) {
+    document.querySelectorAll(".tab-content").forEach(t => t.classList.remove("active"));
+    document.getElementById(tab).classList.add("active");
+}
+
+/* ================== DRAG & DROP ================== */
+function allowDrop(e){ e.preventDefault(); }
+function drag(e){ e.dataTransfer.setData("text", e.target.id); }
+function drop(e){
+    e.preventDefault();
+    let data = e.dataTransfer.getData("text");
+    e.target.appendChild(document.getElementById(data));
+}
+</script>
+</head>
+
+<body>
+
+<!-- ================== FORMS ================== -->
+<div class="section">
+<h2>Forms</h2>
+
+<label>First Name:</label>
+<input id="fname" placeholder="First Name"><br>
+
+<label>Last Name:</label>
+<input id="lname" placeholder="Last Name"><br>
+
+<label>Email:</label>
+<input type="email" id="email"><br>
+
+<label>Gender:</label>
+<input type="radio" name="gender">Male
+<input type="radio" name="gender">Female
+<input type="radio" name="gender">Other<br>
+
+<label>Mobile:</label>
+<input id="mobile" maxlength="10"><br>
+
+<label>Date of Birth:</label>
+<input type="date"><br>
+
+<label>Hobbies:</label>
+<input type="checkbox">Sports
+<input type="checkbox">Reading
+<input type="checkbox">Music<br>
+
+<label>Upload Picture:</label>
+<input type="file"><br>
+
+<label>Country Select:</label>
+<select>
+<option>India</option>
+<option>Russia</option>
+<option>China</option>
+<option>Brazil</option>
+<option>South Africa</option>
+</select><br>
+
+<label>Country Auto-Suggest:</label>
+<input type="text" id="countrySearch" list="countryList"
+       onkeyup="suggestCountry()" placeholder="Type country name">
+<datalist id="countryList"></datalist>
+
+</div>
+
+<!-- ================== ELEMENTS ================== -->
+<div class="section">
+<h2>Elements</h2>
+<button id="dynamicBtn" onclick="changeButtonText()">Dynamic Button</button><br>
+<a href="https://example.com" target="_blank">Valid Link</a><br>
+<a href="https://broken1234link.com">Broken Link</a><br>
+<img src="broken_image.jpg" width="120"><br>
+<a href="sample.txt" download>Download File</a>
+</div>
+
+<!-- ================== WEB TABLE ================== -->
+<div class="section">
+<h2>Web Table</h2>
+<table>
+<tr><th>ID</th><th>Name</th><th>Role</th></tr>
+<tr><td>1</td><td>Alice</td><td>Tester</td></tr>
+<tr><td>2</td><td>Bob</td><td>Developer</td></tr>
+</table>
+</div>
+
+<!-- ================== ALERTS & WINDOWS ================== -->
+<div class="section">
+<h2>Alerts, Windows & Tabs</h2>
+<button onclick="showAlert()">Alert</button>
+<button onclick="window.open('https://example.com')">New Window</button>
+<button onclick="window.open('https://example.com','_blank')">New Tab</button>
+</div>
+
+<!-- ================== FRAMES ================== -->
+<div class="section">
+<h2>Frames & Nested Frames</h2>
+<iframe srcdoc="
+<h3>Main Frame</h3>
+<iframe srcdoc='Nested Frame'></iframe>
+" width="300" height="150"></iframe>
+</div>
+
+<!-- ================== WIDGETS ================== -->
+<div class="section">
+<h2>Widgets</h2>
+Date Picker: <input type="date"><br>
+Slider: <input type="range"><br>
+Progress:
+<progress id="progress" value="0" max="100"></progress>
+<button onclick="startProgress()">Start</button>
+
+<ul class="menu">
+<li>File</li><li>Edit</li><li>View</li>
+</ul>
+
+<div class="tooltip">Hover Me
+<span>Tooltip Text</span>
+</div>
+
+<select>
+<option>Option 1</option>
+<option>Option 2</option>
+</select>
+</div>
+
+<!-- ================== INTERACTIONS ================== -->
+<div class="section">
+<h2>Interactions</h2>
+
+<h4>Draggable & Droppable</h4>
+<div id="drag" draggable="true" ondragstart="drag(event)">DRAG</div>
+<div id="drop" ondrop="drop(event)" ondragover="allowDrop(event)">DROP HERE</div>
+
+<h4>Resizable</h4>
+<div class="resizable">Resize Me</div>
+
+<h4>Selectable</h4>
+<select multiple>
+<option>Item 1</option>
+<option>Item 2</option>
+<option>Item 3</option>
+</select>
+</div>
+
+<!-- ================== TABS ================== -->
+<div class="section">
+<h2>Tabs</h2>
+<button onclick="openTab('tab1')">Tab 1</button>
+<button onclick="openTab('tab2')">Tab 2</button>
+
+<div id="tab1" class="tab-content active">Tab 1 Content</div>
+<div id="tab2" class="tab-content">Tab 2 Content</div>
+</div>
+
+</body>
+</html>
