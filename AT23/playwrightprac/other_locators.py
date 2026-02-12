@@ -31,7 +31,8 @@ with sync_playwright() as p:
 
     Text1=page.get_by_text("Click here to learn Playwright").is_visible()
     print(Text1)
-    text2=page.get_by_text(" Accept Terms and Conditions").click()
+    text2=page.get_by_text(" Accept Terms and Conditions")
+    text2.click()
     time.sleep(3)
     browser.close()
 

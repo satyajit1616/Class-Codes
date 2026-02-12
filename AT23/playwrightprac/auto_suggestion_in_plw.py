@@ -4,7 +4,7 @@ import time
 
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=False)
-    page = browser.new_page() # open a new page/tab in ur recommnede browser
+    page = browser.new_page() # open a new page/tab in ur recommended browser
 
     #open a link and hit in api and call the url
     page.goto(r"https://rahulshettyacademy.com/AutomationPractice/")
