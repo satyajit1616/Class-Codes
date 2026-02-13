@@ -15,8 +15,10 @@ name.send_keys("Satya")
 
 driver.find_element(By.CSS_SELECTOR,"input[id = confirmbtn]").click()
 wait = WebDriverWait(driver, 5)
-alert = wait.until(EC.alert_is_present())
-print(alert.text)
-alert.accept()
+alert1 = wait.until(EC.alert_is_present())
+print(alert1.text)
+alert1.accept()
+
+
 time.sleep(5)
 driver.quit()

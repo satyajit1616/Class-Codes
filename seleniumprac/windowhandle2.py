@@ -13,7 +13,6 @@ time.sleep(3)
 
 parent_window = driver.current_window_handle
 
-
 driver.find_element(By.XPATH, "//a[text()='Sign Up']").click()
 time.sleep(3)
 all_windows = driver.window_handles
