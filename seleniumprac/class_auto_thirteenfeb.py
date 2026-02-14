@@ -35,14 +35,15 @@ driver.find_element(By.ID,"dob").send_keys("13-02-2026")
 time.sleep(1)
 make_my_trip = driver.find_element(By.XPATH,"(//div[text()='6'])[1]")
 make_my_trip.click()
-file_path = r"C:\Users\Srs61\Documents\4TH SEM FEE.pdf"
 
+file_path = r"C:\Users\Srs61\Documents\4TH SEM FEE.pdf"
 file_u = driver.find_element(By.ID,"fileUpload")
 file_u.send_keys(file_path)
 
 # new_tab = driver.find_element(By.XPATH,"//button[text()='Open New Tab']")
 # new_tab.click()
 # print(new_tab.is_enabled())
+
 #
 # new_window = driver.find_element(By.XPATH,"//button[text()='Open New Window']")
 # new_window.click()
