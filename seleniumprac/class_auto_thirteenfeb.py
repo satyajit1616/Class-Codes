@@ -39,15 +39,32 @@ make_my_trip.click()
 file_path = r"C:\Users\Srs61\Documents\4TH SEM FEE.pdf"
 file_u = driver.find_element(By.ID,"fileUpload")
 file_u.send_keys(file_path)
+driver.find_element(By.XPATH,"//button[text()='Upload']").click()
+time.sleep(4)
+driver.find_element(By.ID,"downloadLink").click()
+time.sleep(5)
 
-# new_tab = driver.find_element(By.XPATH,"//button[text()='Open New Tab']")
-# new_tab.click()
-# print(new_tab.is_enabled())
 
-#
-# new_window = driver.find_element(By.XPATH,"//button[text()='Open New Window']")
-# new_window.click()
-# print(new_window.is_enabled())
+parent_window = driver.current_window_handle
+driver.find_element(By.XPATH,"//button[text()='Open New Tab']").click()
+time.sleep(4)
+all_windows = driver.window_handles
+for window in all_windows:
+    if window != parent_window:
+        driver.switch_to.window(window)
+        break
+driver.switch_to.window(parent_window)
+time.sleep(5)
+
+parent_w1 = driver.current_window_handle
+driver.find_element(By.XPATH,"//button[text()='Open New Window']").click()
+time.sleep(4)
+a_windows = driver.window_handles
+for window in a_windows:
+    if window != parent_w1:
+        driver.switch_to.window(window)
+        break
+driver.switch_to.window(parent_w1)
 
 
 driver.find_element(By.XPATH,"//button[text()='Alert']").click()
@@ -85,15 +102,15 @@ wait3 = WebDriverWait(driver,5)
 double_click = wait3.until(EC.alert_is_present())
 double_click.accept()
 
-# driver.switch_to.frame(driver.find_element(By.XPATH,"(//section)[13]"))
-# time.sleep(3)
+driver.execute_script('window.scrollBy(0,1000);')
+time.sleep(2)
 source = driver.find_element(By.ID,"drag")
 target = driver.find_element(By.ID,"drop")
 act3 = ActionChains(driver)
 act3.drag_and_drop(source,target).perform()
 time.sleep(10)
 print(source,target)
-# driver.switch_to.default_content()
+
 
 r_click = driver.find_element(By.ID,"rightClickBox")
 act5 = ActionChains(driver)
