@@ -10,7 +10,7 @@ with sync_playwright() as p:
 
     iframe = page.locator("#courses-iframe")
     iframe.scroll_into_view_if_needed()
-
+#intercact with inside frame
     frame = page.frame_locator("#courses-iframe")
     frame.locator("(//a[text()='Courses'])[1]").click()
     time.sleep(3)

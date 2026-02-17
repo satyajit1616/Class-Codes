@@ -41,13 +41,25 @@ file_u = driver.find_element(By.ID,"fileUpload")
 file_u.send_keys(file_path)
 driver.find_element(By.XPATH,"//button[text()='Upload']").click()
 time.sleep(4)
-driver.find_element(By.ID,"downloadLink").click()
-time.sleep(5)
+# driver.find_element(By.ID,"downloadLink").click()
+# time.sleep(5)
 
 
 parent_window = driver.current_window_handle
 driver.find_element(By.XPATH,"//button[text()='Open New Tab']").click()
 time.sleep(4)
+al_windows = driver.window_handles
+for window1 in al_windows:
+    if window1 != parent_window:
+        driver.switch_to.window(window1)
+        break
+driver.switch_to.window(window1)
+driver.find_element(By.ID,"tabInput").send_keys("Satyajit")
+driver.find_element(By.XPATH,"//button[text()='Click Me']").click()
+wait7 = WebDriverWait(driver,5)
+alert_s = wait7.until(EC.alert_is_present())
+alert_s.accept()
+time.sleep(2)
 all_windows = driver.window_handles
 for window in all_windows:
     if window != parent_window:
@@ -59,6 +71,20 @@ time.sleep(5)
 parent_w1 = driver.current_window_handle
 driver.find_element(By.XPATH,"//button[text()='Open New Window']").click()
 time.sleep(4)
+# t_window = driver.window_handles
+# for window in t_window:
+#     if window != parent_w1:
+#         driver.switch_to.window(window)
+#         break
+# driver.switch_to.window(window)
+# time.sleep(4)
+# driver.find_element(By.ID,"winInput").send_keys("Satyajit")
+# time.sleep(3)
+# driver.find_element(By.XPATH,"//button[text()='Click Me']")
+# time.sleep(2)
+# wait8 = WebDriverWait(driver,5)
+# w_alert = wait8.until(EC.alert_is_present())
+# w_alert.accept()
 a_windows = driver.window_handles
 for window in a_windows:
     if window != parent_w1:
@@ -66,7 +92,7 @@ for window in a_windows:
         break
 driver.switch_to.window(parent_w1)
 
-
+#Alert
 driver.find_element(By.XPATH,"//button[text()='Alert']").click()
 wait1 = WebDriverWait(driver, 5)
 alert1 = wait1.until(EC.alert_is_present())
@@ -102,7 +128,7 @@ wait3 = WebDriverWait(driver,5)
 double_click = wait3.until(EC.alert_is_present())
 double_click.accept()
 
-driver.execute_script('window.scrollBy(0,1000);')
+driver.execute_script('window.scrollBy(0,500);')
 time.sleep(2)
 source = driver.find_element(By.ID,"drag")
 target = driver.find_element(By.ID,"drop")
@@ -121,8 +147,6 @@ driver.find_element(By.XPATH,"//button[text()='Edit']").click()
 wait6 = WebDriverWait(driver,5)
 alert5 = wait6.until(EC.alert_is_present())
 alert5.accept()
-
-
 
 
 driver.switch_to.frame("frame1")
