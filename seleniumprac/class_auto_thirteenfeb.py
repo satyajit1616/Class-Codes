@@ -41,8 +41,8 @@ file_u = driver.find_element(By.ID,"fileUpload")
 file_u.send_keys(file_path)
 driver.find_element(By.XPATH,"//button[text()='Upload']").click()
 time.sleep(4)
-# driver.find_element(By.ID,"downloadLink").click()
-# time.sleep(5)
+driver.find_element(By.ID,"downloadLink").click()
+time.sleep(5)
 
 
 parent_window = driver.current_window_handle
@@ -167,6 +167,8 @@ submit = driver.find_element(By.XPATH,"//button[text()='Submit']")
 submit.click()
 res = driver.find_element(By.ID,"result")
 print(res.text)
+driver.execute_script("window.scrollBy(0,-1000)")
+driver.save_screenshot(r"C:\Users\Srs61\PycharmProjects\PythonProject\Screenshot\class_automation.png")
 
 time.sleep(3)
 driver.quit()

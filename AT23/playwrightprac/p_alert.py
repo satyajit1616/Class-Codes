@@ -7,7 +7,8 @@ with sync_playwright() as p:
     page.goto("https://rahulshettyacademy.com/AutomationPractice/")
 
     time.sleep(3)
-    page.fill("#name","Satya")
+    # page.fill("#name","Satya")
+    page.locator("#name").fill("Satya")
     #handle the alert
     page.once("dialog",lambda dialog:(
         print("ALERT TEXT:-",dialog.message),
