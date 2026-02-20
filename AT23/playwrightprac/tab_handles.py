@@ -22,7 +22,8 @@ with sync_playwright() as p:
 
     print(new_page.title())
 
-    course = new_page.locator("(//a[text()='Courses'])[1]").click()
+    course = new_page.locator("(//a[text()='Courses'])[1]")
+    course.click()
     print(new_page.locator("//div[text()='959,200']").text_content())
 
     time.sleep(2)
