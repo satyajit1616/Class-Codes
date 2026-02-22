@@ -12,6 +12,7 @@ with sync_playwright() as p:
     count = checkboxes.count()
 
 
+
     for i in range(count):
         checkboxes.nth(i).check()
 

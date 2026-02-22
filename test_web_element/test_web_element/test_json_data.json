@@ -1,0 +1,45 @@
+{
+    "instructor": "Rahul Shett",
+    "courses": [
+        {
+            "course_name": "elenium Webdriver with Java Basics + Advanced + Interview Guide",
+            "price": 30
+        },
+        {
+            "course_name": "Learn SQL in Practical + Database Testing from Scratch",
+            "price": 25
+        },
+        {
+            "course_name": "Appium (Selenium) - Mobile Automation Testing from Scratch",
+            "price": 30
+        },
+        {
+            "course_name": "WebSecurity Testing for Beginners-QA knowledge to next level",
+            "price": 20
+        },
+        {
+            "course_name": "Learn JMETER from Scratch - (Performance + Load) Testing Tool",
+            "price": 25
+        },
+        {
+            "course_name": "WebServices / REST API Testing with SoapUI",
+            "price": 35
+        },
+        {
+            "course_name": "QA Expert Course :Software Testing + Bugzilla + SQL + Agile",
+            "price": 25
+        },
+        {
+            "course_name": "Master Selenium Automation in simple Python Language",
+            "price": 25
+        },
+        {
+            "course_name": "Advanced Selenium Framework Pageobject, TestNG, Maven, Jenkins,C",
+            "price": 20
+        },
+        {
+            "course_name": "Write effective QA Resume that will turn to interview call",
+            "price": 0
+        }
+    ]
+}

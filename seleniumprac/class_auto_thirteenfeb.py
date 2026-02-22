@@ -36,13 +36,13 @@ time.sleep(1)
 make_my_trip = driver.find_element(By.XPATH,"(//div[text()='6'])[1]")
 make_my_trip.click()
 
-file_path = r"C:\Users\Srs61\Documents\4TH SEM FEE.pdf"
-file_u = driver.find_element(By.ID,"fileUpload")
-file_u.send_keys(file_path)
-driver.find_element(By.XPATH,"//button[text()='Upload']").click()
-time.sleep(4)
-driver.find_element(By.ID,"downloadLink").click()
-time.sleep(5)
+# file_path = r"C:\Users\Srs61\Documents\4TH SEM FEE.pdf"
+# file_u = driver.find_element(By.ID,"fileUpload")
+# file_u.send_keys(file_path)
+# driver.find_element(By.XPATH,"//button[text()='Upload']").click()
+# time.sleep(4)
+# driver.find_element(By.ID,"downloadLink").click()
+# time.sleep(5)
 
 
 parent_window = driver.current_window_handle
