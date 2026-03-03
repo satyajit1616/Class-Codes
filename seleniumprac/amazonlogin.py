@@ -1,6 +1,5 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.remote.webelement import WebElement
 import time
 
 driver=webdriver.Chrome()
@@ -14,5 +13,5 @@ ap_password=driver.find_element(By.ID, 'ap_password')
 ap_password.send_keys('Prasad@123')
 btn=driver.find_element(By.ID, 'signInSubmit')
 btn.click()
-time.sleep(10)
+time.sleep(5)
 driver.quit()

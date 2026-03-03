@@ -6,13 +6,13 @@ with sync_playwright() as p:
     page = browser.new_page()
     page.goto("https://rahulshettyacademy.com/AutomationPractice/")
 
-    # hover_btn = page.locator("#mousehover")
-    # hover_btn.scroll_into_view_if_needed()
-    # hover_btn.hover()
-    # time.sleep(2)
-    # print(page.locator("a[href='#top']").text_content())
-    # page.click("a[href='#top']")
-    # time.sleep(3)
+    hover_btn = page.locator("#mousehover")
+    hover_btn.scroll_into_view_if_needed()
+    hover_btn.hover()
+    time.sleep(2)
+    print(page.locator("a[href='#top']").text_content())
+    page.click("a[href='#top']")
+    time.sleep(3)
     #
     #
     # #screenshot

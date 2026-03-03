@@ -24,6 +24,10 @@ with sync_playwright() as playwright:
     #left click
     page.locator().click()
 
+    #selective dropdown
+    page.select_option("#dropdown_id", value="option1")
+    page.locator("#dropdown_id").select_option("option1")
+
     #double click
     page.locator().dblclick()
 

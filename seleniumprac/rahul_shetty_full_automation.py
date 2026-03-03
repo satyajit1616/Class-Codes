@@ -132,5 +132,14 @@ check_click = driver.find_element(By.XPATH,"//div[text()='I agree to receive pro
 check_click.click()
 send_code = driver.find_element(By.XPATH,"//span[text()='Send code']")
 send_code.click()
+time.sleep(5)
+driver.close()
+driver.switch_to.window(parent_w3)
+time.sleep(5)
+driver.get("https://rahulshettyacademy.com/AutomationPractice/")
+# driver.execute_script("window.scrollBy(0,500);")
+# driver.save_screenshot(r"C:\Users\Srs61\PycharmProjects\PythonProject\Screenshot\full_page1.png\full_page.png=True")
 time.sleep(4)
+
+
 driver.quit()

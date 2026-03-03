@@ -11,7 +11,6 @@ with sync_playwright() as p:
         print("ALERT CONFIRM TEXT:-",dialog.message),
         dialog.accept()
     ))
-
     page.click("#confirmbtn")
     time.sleep(2)
     browser.close()
