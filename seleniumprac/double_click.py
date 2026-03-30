@@ -6,8 +6,6 @@ import time
 driver = webdriver.Chrome()
 driver.maximize_window()
 
-
-
 driver.get("https://demoqa.com/buttons")
 d_button = driver.find_element(By.ID,"doubleClickBtn")
 act = ActionChains(driver)

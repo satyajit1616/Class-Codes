@@ -1,0 +1,26 @@
+from playwright.sync_api import sync_playwright
+import  time
+with sync_playwright() as p:
+    browser = p.chromium.launch(headless=False)
+    page = browser.new_page()
+    url = "https://automationexercise.com/"
+    page.goto(url)
+    page.locator("//a[@href='/login']").click()
+    page.fill("(//input[@type='email'])[1]","AT#23@gmail.com")
+    page.fill("//input[@type='password']","txGs9e4nvv@UL9A")
+    page.locator("(//button[@type='submit'])[1]").click()
+    page.locator("//a[@href='/brand_products/Polo']").click()
+    page.locator("(//a[text()='Add to cart'])[1]").click()
+    page.locator("//a[text()=' Cart']").click()
+    page.locator("//a[text()='Proceed To Checkout']").click()
+    page.locator("//a[text()='Place Order']").click()
+    page.locator("(//input[@type='text'])[1]").fill("Satyajit Swain")
+    page.fill("(//input[@type='text'])[2]","7478105596220001")
+    page.fill("(//input[@type='text'])[3]","353")
+    page.fill("(//input[@type='text'])[4]","10")
+    page.fill("(//input[@type='text'])[5]","2030")
+    page.locator("(//button[@type='submit'])[1]").click()
+    time.sleep(10)
+    page.locator("//a[text()='Download Invoice']").click()
+    time.sleep(5)
+    browser.close()
