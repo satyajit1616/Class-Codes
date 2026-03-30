@@ -43,24 +43,24 @@ with sync_playwright() as p:
     with page.expect_popup() as new_page_info:
         page.locator("#openwindow").click()
 
-    new_page = new_page_info.value
-    new_page.wait_for_load_state()
-
-    print('new_page.title()')
-    new_page.locator("(//a[text()='Contact'])[1]").click()
-    time.sleep(3)
-    new_page.fill("(//input[@type='text'])[2]","Satyajit")
-    time.sleep(2)
-    new_page.fill("input[type='email']","sks1616@outlook.com")
-    time.sleep(2)
-    new_page.fill("(//input[@type='text'])[3]","Automation")
-    new_page.fill("(//input[@type='text'])[4]","7856926630")
-    time.sleep(2)
-    new_page.get_by_placeholder("Messege").fill("Hi I want to join this course")
-    time.sleep(2)
-    new_page.locator("button[type='submit']").click()
-    new_page.close()
-    time.sleep(4)
+    # new_page = new_page_info.value
+    # new_page.wait_for_load_state()
+    #
+    # print('new_page.title()')
+    # new_page.locator("(//a[text()='Contact'])[1]").click()
+    # time.sleep(3)
+    # new_page.fill("(//input[@type='text'])[2]","Satyajit")
+    # time.sleep(2)
+    # new_page.fill("input[type='email']","sks1616@outlook.com")
+    # time.sleep(2)
+    # new_page.fill("(//input[@type='text'])[3]","Automation")
+    # new_page.fill("(//input[@type='text'])[4]","7856926630")
+    # time.sleep(2)
+    # new_page.get_by_placeholder("Messege").fill("Hi I want to join this course")
+    # time.sleep(2)
+    # new_page.locator("button[type='submit']").click()
+    # new_page.close()
+    # time.sleep(4)
 
     hover_btn = page.locator("#mousehover")
     hover_btn.scroll_into_view_if_needed()
