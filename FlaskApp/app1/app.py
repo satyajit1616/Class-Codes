@@ -1,8 +1,25 @@
-from flask import Flask,redirect,url_for,render_template,request,jsonify
+from flask import Flask,redirect,url_for,render_template,request,jsonify,session
 import sqlite3
 from werkzeug.security import generate_password_hash,check_password_hash
+from datetime import timedelta
+import secrets
+from flask_jwt_extended import (JWTManager,
+                                create_access_token,
+                                jwt_required,
+                                get_jwt_identity)
+
 
 app = Flask(__name__)
+app.secret_key = "supersecretkey-change-this"
+
+#----------------
+#JWT Config
+#-----------------
+app.config["JWT_SECRET_KEY"]= "jwt-super-secret-chge-this"
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
+
+jwt = JWTManager(app)
+
 
 DATABASE = "users.db"
 
@@ -111,39 +128,40 @@ def get_users():
     user_list = [dict(i) for i in users]
     return jsonify(user_list),200
 
-@app.route("/api/login", methods=["GET", "POST"])
-def login():
-    if request.method == "GET":
-        return render_template("login.html")
 
-    # POST METHOD
+#------------------------------------
+#Login API with JWT Token
+#------------------------------------
+@app.route("/api/login",methods=["POST"])
+def login():
     data = request.form if request.form else request.get_json()
 
-    email = (data.get("email") or "").strip()
-    password = (data.get("password") or "").strip()
+    email = data.get("email").strip()
+    password = data.get("password").strip()
 
-    # Validation
     if not email or not password:
-        return jsonify({"message": "Email and Password are required"}), 400
+        return jsonify({"message ":"Email or password are required"})
 
-    try:
-        conn = get_db_connection()
-        user = conn.execute("SELECT * FROM users WHERE email = ?",(email,)).fetchone()
-        conn.close()
+    conn = get_db_connection()
+    user = conn.execute("SELECT * FROM users WHERE email = ?",(email,)).fetchone()
+    conn.close()
 
-        # Check user exists
-        if user is None:
-            return jsonify({"message": "Login failed: User not found"}), 401
+    if user and check_password_hash(user["password"],password):
+        session["user_email"] = email
 
-        # Check password
-        if not check_password_hash(user["password"], password):
-            return jsonify({"message": "Login failed: Incorrect password"}), 401
+        access_token = create_access_token(identity=email,
+                                           additional_claims={
+                                               "role":user["role"],"token_type":"user_jwt"
+                                           })
 
-        # SUCCESS → Redirect to dashboard
-        return redirect(url_for("dashboard"))
+        return jsonify({
+            "message":"Login Successful",
+            "access_token":access_token,
+            "token_type":"Bearer",
+            "redirect_url":"/dashboard"
+        })
 
-    except Exception as e:
-        return jsonify({"message": str(e)}), 500
+    return jsonify({"message ":"Invalid credentials"}),401
 
 
 if __name__ == "__main__":
